@@ -1,3 +1,15 @@
+
+// LOADING GAME PAGE ON CLICK " SAVE YOUR SYSTEM NOW " 
+
+window.onload= function(){
+  document.getElementById("start-game").onclick = function() {
+   document.getElementById("Home-Page-Header").style.display = "none";
+   document.getElementById("game-board").style.display="block";
+  }
+  };
+  
+
+
 const availableCharacters =
   "123456780ABCDEFGHIJKLMNOPQRTabcdefghijklmnopqrstuvwxyz";
 
@@ -128,16 +140,10 @@ for (let i = 0; i < columns; i++) {
     .fadeOut(0);
 });
 
-/* document.getElementById("start-game").onclick = function() {
-    document.getElementsByClassName("Home-Page-Header").style.display = "none";
-
-};?? Element.prototype.hide = function() {
-    this.style.display = 'none';
-}*/
 
 // SYNTAX $(selector).hide(speed,easing,callback)
-  $(document).ready(function(){
+ /* $(document).ready(function(){
     $(".start-game").click(function(){
       $("Home-Page-Header").hide();
     });
-});
+});*/

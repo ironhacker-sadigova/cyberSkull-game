@@ -16,7 +16,7 @@ body {
   padding: 0;
 }
 
-.Home-Page-Header{
+#Home-Page-Header{
 display: flex;
 justify-content:space-between;
 }
@@ -224,6 +224,8 @@ h1:nth-child(3) {
 }
 
 #container {
+display: none;
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -287,4 +289,19 @@ button {
   color: white;
   font-weight: bold;
   
+}
+
+#game-board {
+  position: fixed;
+  display: none;
+  border: white solid 10px;
+  width: 150vh;
+  height: 100vh;
+  margin-left:auto;
+  margin-right: auto;
+}
+
+#player img{
+  width: 8vh;
+
 }

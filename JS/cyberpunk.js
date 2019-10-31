@@ -1,13 +1,61 @@
-
 // LOADING GAME PAGE ON CLICK " SAVE YOUR SYSTEM NOW " 
 
-window.onload= function(){
-  document.getElementById("start-game").onclick = function() {
-   document.getElementById("Home-Page-Header").style.display = "none";
-   document.getElementById("game-board").style.display="block";
+window.onload = function () {
+  document.getElementById("start-game").onclick = function () {
+    document.getElementById("Home-Page-Header").style.display = "none";
+    document.getElementById("game-board").style.display = "block";
   }
+
+  function startGame() {
+    myGameArea.start();
+    player = new Component(50, 50, "./SVG/player.svg", 100, 200);
+  }
+
+  var myGameArea = {
+    canvas: document.createElement("canvas"),
+    drawCanvas: function () {
+      this.canvas.width = screen.width - screen.width * 0.15;
+      this.canvas.height = screen.height - screen.height * 0.15;
+      this.context = this.canvas.getContext("2d");
+      document.getElementById("game-board").append(this.canvas);
+    },
+    start: function () {
+      this.drawCanvas();
+      this.reqAnimation = window.requestAnimationFrame(updateGameArea);
+    },
+    clear: function () {
+      this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    }
   };
-  
+
+  function Component(width, height, img, x, y) {
+    this.img = new Image();
+    this.img.src = img;
+    this.width = width;
+    this.height = height;
+    this.x = x;
+    this.y = y;
+    this.update = function () {
+      myGameArea.context.drawImage(
+        this.img,
+        this.x,
+        this.y,
+        this.width,
+        this.height
+      );
+    };
+  }
+
+  function updateGameArea() {
+    myGameArea.clear();
+    player.update();
+    myGameArea.reqAnimation = window.requestAnimationFrame(updateGameArea);
+  }
+
+  startGame();
+
+};
+
 
 
 const availableCharacters =
@@ -50,7 +98,9 @@ class MatrixStream {
     // fill the pipe
 
     while (this.count < this.len) {
-      let node = { code: this.status };
+      let node = {
+        code: this.status
+      };
 
       switch (this.status) {
         case 0:
@@ -134,16 +184,25 @@ for (let i = 0; i < columns; i++) {
   }, 100 + Math.random() * 100);
 }
 
-(function() {
+(function () {
   $("#testdiv")
     .delay(2000)
     .fadeOut(0);
 });
 
 
-// SYNTAX $(selector).hide(speed,easing,callback)
- /* $(document).ready(function(){
-    $(".start-game").click(function(){
-      $("Home-Page-Header").hide();
-    });
-});*/
+// MAKING THE PLAYER MOVE
+document.onkeydown = function (e) {
+  if (e.keyCode === 39) {
+    player.x += 10;
+  }
+  if (e.keyCode === 37) {
+    player.x -= 10;
+  }
+  if (e.keyCode === 38) {
+    player.y -= 10;
+  }
+  if (e.keyCode === 40) {
+    player.y += 10
+  }
+};

@@ -16,10 +16,11 @@ body {
   padding: 0;
 }
 
-#Home-Page-Header{
-display: flex;
-justify-content:space-between;
+#Home-Page-Header {
+  display: flex;
+  justify-content: space-between;
 }
+
 .homePageSkulls {
   display: flex;
   align-items: center;
@@ -29,7 +30,7 @@ justify-content:space-between;
   justify-content: space-evenly;
 }
 
-.gameTitle h1{
+.gameTitle h1 {
   text-align: center;
   font-size: 6em;
   font-family: 'Special Elite', cursive;
@@ -53,6 +54,7 @@ h1:nth-child(3) {
   color: #f16f6f;
   animation: glitch3 6.5s infinite;
 }
+
 /*Keyframes*/
 
 @keyframes glitch1 {
@@ -60,50 +62,62 @@ h1:nth-child(3) {
     transform: none;
     opacity: 2;
   }
+
   7% {
     transform: skew(-1deg, -0.9deg);
     opacity: 0.75;
   }
+
   10% {
     transform: none;
     opacity: 1;
   }
+
   27% {
     transform: none;
     opacity: 1;
   }
+
   30% {
     transform: skew(0.8deg, -0.1deg);
     opacity: 0.75;
   }
+
   35% {
     transform: none;
     opacity: 1;
   }
+
   52% {
     transform: none;
     opacity: 1;
   }
+
   55% {
     transform: skew(-1deg, 0.2deg);
     opacity: 0.75;
   }
+
   50% {
     transform: none;
     opacity: 1;
   }
+
   72% {
     transform: none;
     opacity: 1;
   }
+
   75% {
     transform: skew(0.4deg, 1deg);
     opacity: 0.75;
   }
+
   80% {
     transform: none;
     opacity: 1;
   }
+
   100% {
     transform: none;
     opacity: 1;
@@ -115,50 +129,62 @@ h1:nth-child(3) {
     transform: none;
     opacity: 0.25;
   }
+
   7% {
     transform: translate(-2px, -3px);
     opacity: 0.5;
   }
+
   10% {
     transform: none;
     opacity: 0.25;
   }
+
   27% {
     transform: none;
     opacity: 0.25;
   }
+
   30% {
     transform: translate(-5px, -2px);
     opacity: 0.5;
   }
+
   35% {
     transform: none;
     opacity: 0.25;
   }
+
   52% {
     transform: none;
     opacity: 0.25;
   }
+
   55% {
     transform: translate(-5px, -1px);
     opacity: 0.5;
   }
+
   50% {
     transform: none;
     opacity: 0.25;
   }
+
   72% {
     transform: none;
     opacity: 0.25;
   }
+
   75% {
     transform: translate(-2px, -6px);
     opacity: 0.5;
   }
+
   80% {
     transform: none;
     opacity: 0.25;
   }
+
   100% {
     transform: none;
     opacity: 0.25;
@@ -170,61 +196,74 @@ h1:nth-child(3) {
     transform: none;
     opacity: 0.25;
   }
+
   7% {
     transform: translate(2px, 3px);
     opacity: 0.5;
   }
+
   10% {
     transform: none;
     opacity: 0.25;
   }
+
   27% {
     transform: none;
     opacity: 0.25;
   }
+
   30% {
     transform: translate(5px, 2px);
     opacity: 0.5;
   }
+
   35% {
     transform: none;
     opacity: 0.25;
   }
+
   52% {
     transform: none;
     opacity: 0.25;
   }
+
   55% {
     transform: translate(5px, 1px);
     opacity: 0.5;
   }
+
   50% {
     transform: none;
     opacity: 0.25;
   }
+
   72% {
     transform: none;
     opacity: 0.25;
   }
+
   75% {
     transform: translate(2px, 6px);
     opacity: 0.5;
   }
+
   80% {
     transform: none;
     opacity: 0.25;
   }
+
   100% {
     transform: none;
     opacity: 0.25;
   }
 }
+
 .homePageSkulls img {
   filter: hue-rotate(45deg);
 }
 
 #container {
-display: none;
+  display: none;
 
   display: flex;
   align-items: center;
@@ -248,24 +287,27 @@ display: none;
 }
 
 .b {
-/* .bright { */
+  /* .bright { */
   color: white;
 }
 
 .l {
-/* .light { */
-font-size: 60px;
-font-family: 'Futura';
-color: #fff;
-text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #ff0080, 0 0 30px #ff0080, 0 0 40px #ff0080, 0 0 55px #ff0080, 0 0 75px #ff0080;
-text-align: center;
-};
+  /* .light { */
+  font-size: 60px;
+  font-family: 'Futura';
+  color: #fff;
+  text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #ff0080, 0 0 30px #ff0080, 0 0 40px #ff0080, 0 0 55px #ff0080, 0 0 75px #ff0080;
+  text-align: center;
+}
+
+;
 
 .laptop {
   position: absolute;
   margin-left: auto;
   margin-right: auto;
 }
+
 .laptop img {
   display: block;
   height: 60vh;
@@ -275,33 +317,33 @@ text-align: center;
 
 button {
   position: relative;
-  bottom:42.75vh;
+  bottom: 42.75vh;
   left: 12vh;
-  
+
   display: block;
   padding: 0 10px 0 10px;
   border: solid 1px darkslateblue;
   border-radius: 10px;
-  font-size:20px;
-  
+  font-size: 20px;
 
-  background-color:  #1f2138;
+
+  background-color: #1f2138;
   color: white;
   font-weight: bold;
-  
+
 }
 
 #game-board {
-  position: fixed;
   display: none;
-  border: white solid 10px;
-  width: 150vh;
-  height: 100vh;
-  margin-left:auto;
-  margin-right: auto;
+
 }
 
-#player img{
+#player img {
   width: 8vh;
+
+}
+
+canvas {
+  border: white solid 10px;
 
 }

@@ -7,6 +7,7 @@
 body {
   background-color: #1f2138;
 
+
 }
 
 html,
@@ -35,7 +36,7 @@ body {
   font-size: 6em;
   font-family: 'Special Elite', cursive;
   color: #fff;
-  font-size: 5em;
+  font-size: 3em;
   letter-spacing: 8px;
   font-weight: 400;
 
@@ -310,18 +311,18 @@ h1:nth-child(3) {
 
 .laptop img {
   display: block;
-  height: 60vh;
+  height: 45vh;
   filter: hue-rotate(45deg);
 
 }
 
 button {
   position: relative;
-  bottom: 42.75vh;
-  left: 12vh;
+  bottom: 33.80vh;
+  left: 6.75vh;
 
   display: block;
-  padding: 0 10px 0 10px;
+  padding: 0 9px 0 9px;
   border: solid 1px darkslateblue;
   border-radius: 10px;
   font-size: 20px;

@@ -5,10 +5,13 @@ window.onload = function () {
     document.getElementById("Home-Page-Header").style.display = "none";
     document.getElementById("game-board").style.display = "block";
   }
+  var player; 
+  var myObstacles = [];
 
   function startGame() {
     myGameArea.start();
     player = new Component(50, 50, "./SVG/player.svg", 100, 200);
+    myObstacle = new Component (50, 50, "./SVG/skull.svg", 150, 250);
   }
 
   var myGameArea = {
@@ -22,9 +25,21 @@ window.onload = function () {
     start: function () {
       this.drawCanvas();
       this.reqAnimation = window.requestAnimationFrame(updateGameArea);
+      document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+      this.frameNo=0;
+      this.interval= setInterval(updateGameArea, 20);
     },
     clear: function () {
       this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    },
+    stop: function(){
+      clearInterval(this.interval);
+    }
+  }
+    function everyinterval(n){
+      if ((myGameArea.frameNo / n) % 1 === 0) {return true;}
+      return false;
+
     }
   };
 
@@ -33,6 +48,8 @@ window.onload = function () {
     this.img.src = img;
     this.width = width;
     this.height = height;
+    this.speedX=0;
+    this.speedY=0;
     this.x = x;
     this.y = y;
     this.update = function () {
@@ -41,13 +58,50 @@ window.onload = function () {
         this.x,
         this.y,
         this.width,
-        this.height
-      );
-    };
+        this.height);
+      }
+    this.newPos = function() {
+      this.x += this.speedX;
+      this.y += this.speedY;
+    }
+    this.crashWith = function(otherobject){
+      var myleft= this.x;
+      var myright= this.x + (this.width);
+      var mytop = this.y; 
+      var mybottom = this.y + (this.height);
+      var otherleft= otherobject.x;
+      var otherright = otherobject.x + (otherobject.width);
+    var othertop = otherobject.y;
+    var otherbottom = otherobject.y + (otherobject.height);
+    var crash = true;
+    if ((mybottom < othertop) ||
+    (mytop > otherbottom) ||
+    (myright < otherleft) ||
+    (myleft > otherright)) {
+      crash = false;
+    }
+    return crash;
   }
+  };
 
   function updateGameArea() {
+    var x, y;
+    for (i=0; i<myObstacles.length, i++;){
+      if (player.crashWith(myObstacles[i])){ myGameArea.stop()
+      return;
+    }
+    }
     myGameArea.clear();
+    myGameArea.frameNo +=1;
+    if (myGameArea.frameNo === 1 || everyinterval(150)){
+    x= myGameArea.canvas.width;
+    y= myGameArea.canvas.height - 150;
+    myObstacles.push (new component (50, 50, "./SVG/skull.svg", 150, 250))
+    for (i=0; i < myObstacles.length; i +=1){
+      myObstacles[i].x +=1;
+      myObstacles [i].update();
+    }
+    player.newPos();
     player.update();
     myGameArea.reqAnimation = window.requestAnimationFrame(updateGameArea);
   }
@@ -56,7 +110,24 @@ window.onload = function () {
 
 };
 
+// MAKING THE PLAYER MOVE
+document.onkeydown = function (e) {
+  if (e.keyCode === 39) {
+    player.x += 10;
+  }
+  if (e.keyCode === 37) {
+    player.x -= 10;
+  }
+  if (e.keyCode === 38) {
+    player.y -= 10;
+  }
+  if (e.keyCode === 40) {
+    player.y += 10
+  }
+};
 
+
+// MATRIX 
 
 const availableCharacters =
   "123456780ABCDEFGHIJKLMNOPQRTabcdefghijklmnopqrstuvwxyz";
@@ -168,7 +239,7 @@ class MatrixStream {
   }
 }
 
-const columns = 20;
+const columns = 15;
 const rows = 60;
 const matrix = [];
 
@@ -190,19 +261,3 @@ for (let i = 0; i < columns; i++) {
     .fadeOut(0);
 });
 
-
-// MAKING THE PLAYER MOVE
-document.onkeydown = function (e) {
-  if (e.keyCode === 39) {
-    player.x += 10;
-  }
-  if (e.keyCode === 37) {
-    player.x -= 10;
-  }
-  if (e.keyCode === 38) {
-    player.y -= 10;
-  }
-  if (e.keyCode === 40) {
-    player.y += 10
-  }
-};

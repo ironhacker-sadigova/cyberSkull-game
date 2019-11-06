@@ -5,11 +5,11 @@ window.onload = function () {
     document.getElementById("Home-Page-Header").style.display = "none";
     document.getElementById("game-board").style.display = "block";
   }
-  var player; 
-  var myObstacles = [];
 
   function startGame() {
     myGameArea.start();
+    var player; 
+    var myObstacles = [];
     player = new Component(50, 50, "./SVG/player.svg", 100, 200);
     myObstacle = new Component (50, 50, "./SVG/skull.svg", 150, 250);
   }
@@ -26,7 +26,7 @@ window.onload = function () {
       this.drawCanvas();
       this.reqAnimation = window.requestAnimationFrame(updateGameArea);
       document.body.insertBefore(this.canvas, document.body.childNodes[0]);
-      this.frameNo=0;
+      this.frames=0;
       this.interval= setInterval(updateGameArea, 20);
     },
     clear: function () {
@@ -34,12 +34,17 @@ window.onload = function () {
     },
     stop: function(){
       clearInterval(this.interval);
+    }, 
+    score: function() {
+      var points = Math.floor(this.frames / 5);
+      this.context.font = "23px serif";
+      this.context.fillStyle = "black";
+      this.context.fillText("Virus Avoided: " + points, 500, 50);
     }
   }
     function everyinterval(n){
-      if ((myGameArea.frameNo / n) % 1 === 0) {return true;}
+      if ((myGameArea.frames / n) % 1 === 0) {return true;}
       return false;
-
     }
   };
 
@@ -85,24 +90,30 @@ window.onload = function () {
   };
 
   function updateGameArea() {
-    var x, y;
     for (i=0; i<myObstacles.length, i++;){
-      if (player.crashWith(myObstacles[i])){ myGameArea.stop()
+      if (player.crashWith(myObstacles[i])){ myGameArea.stop();
       return;
     }
     }
-    myGameArea.clear();
-    myGameArea.frameNo +=1;
-    if (myGameArea.frameNo === 1 || everyinterval(150)){
-    x= myGameArea.canvas.width;
-    y= myGameArea.canvas.height - 150;
-    myObstacles.push (new component (50, 50, "./SVG/skull.svg", 150, 250))
-    for (i=0; i < myObstacles.length; i +=1){
-      myObstacles[i].x +=1;
+    myGameArea.clear(),
+    function updateObstacles(){ 
+    for (i=0; i < myObstacles.length; i++){
+      myObstacles[i].x +=4;
       myObstacles [i].update();
     }
+     myGameArea.frames +=1;
+    if (myGameArea.frames % 90 === 0){
+    x= myGameArea.canvas.width;
+    y= myGameArea.canvas.height - 150;
+    var minGap =30;
+    var maxGap=300;
+    var gap= Math.floor(Math.random()*(maxGap - minGap+1) + minGap)
+    myObstacles.push (new component (50, 50, "./SVG/skull.svg", 150, 250))
+  }
     player.newPos();
     player.update();
+    updateObstacles();
+    myGameArea.score();
     myGameArea.reqAnimation = window.requestAnimationFrame(updateGameArea);
   }
 
@@ -126,6 +137,10 @@ document.onkeydown = function (e) {
   }
 };
 
+document.onkeyup = function(e) {
+  player.speedX = 0;
+  player.speedY = 0;
+}
 
 // MATRIX 
 

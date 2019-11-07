@@ -73,8 +73,23 @@ window.onload = function() {
         this.height
         );
       },
-      this.draw() // dessiner obstacles et faire une boucle sur larray pour chaque obstacles.draw 
-    this.newPos = function() {
+      
+    /* this.draw() = function () {
+     var img = new Image();
+     img.onload = function() {
+     ctx.drawImage(img, 0, 0);
+}
+img.src = "./SVG/skull.svg";
+    
+    } */
+     
+        
+      // dessiner obstacles et faire une boucle sur larray pour chaque obstacles.draw 
+   
+   
+   
+   
+      this.newPos = function() {
       this.x += this.speedX;
       this.y += this.speedY;
     }

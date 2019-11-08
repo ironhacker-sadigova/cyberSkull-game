@@ -18,7 +18,8 @@ window.onload = function() {
     player = new Component(50, 50, "./SVG/player.svg", 100, 200);
     // virus = new Component (50, 50, "./SVG/skull.svg", 150, 250);    
     myGameArea.myObstacles=[];
-    createObstacles();
+    fillObstacles();
+    drawObstacles();
   }
 
   var myGameArea = {
@@ -115,10 +116,8 @@ window.onload = function() {
     // return crash;
   }
   };
-  function createObstacles(){ 
-    for (var i = 0; i < myObstacles.length; i++) {
-  return myObstacles.draw();
-}
+
+  function fillObstacles(){ 
     x= Math.floor(Math.random()*(myGameArea.canvas.width - 0+1) + 0)
     y= Math.floor(Math.random()*(myGameArea.canvas.height - 0+1) + 0)
     // var minGap =30;
@@ -133,6 +132,14 @@ window.onload = function() {
     myGameArea.myObstacles.push (new Component (50, 50, "./SVG/skull.svg", x, y))
     console.log(myGameArea.myObstacles);
   }
+  
+  function drawObstacles() {
+    myObstacles.forEach(obstacle => {
+        obstacle.draw();
+    });
+  }
+
+
 
 
   function updateGameArea() {

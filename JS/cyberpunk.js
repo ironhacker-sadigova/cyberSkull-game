@@ -1,4 +1,6 @@
 
+ 
+ 
  var player; 
 
  var points; 
@@ -73,18 +75,19 @@ window.onload = function() {
         this.height
         );
       },
-      
-    /* this.draw() = function () {
-     var img = new Image();
-     img.onload = function() {
-     ctx.drawImage(img, 0, 0);
-}
-img.src = "./SVG/skull.svg";
     
-    } */
-     
-        
-      // dessiner obstacles et faire une boucle sur larray pour chaque obstacles.draw 
+// Draw obstacles
+ this.draw = function (){
+  myObstacles.context.drawImage(
+     this.img,
+     this.x,
+     this.y,
+     this.width,
+     this.height
+   )
+ }
+
+      // and then loop  for each  obstacles.draw 
    
    
    
@@ -113,6 +116,9 @@ img.src = "./SVG/skull.svg";
   }
   };
   function createObstacles(){ 
+    for (var i = 0; i < myObstacles.length; i++) {
+  return myObstacles.draw();
+}
     x= Math.floor(Math.random()*(myGameArea.canvas.width - 0+1) + 0)
     y= Math.floor(Math.random()*(myGameArea.canvas.height - 0+1) + 0)
     // var minGap =30;

@@ -188,7 +188,7 @@ document.onkeydown = function (e) {
 //   player.speedY = 0;
 // }
 }
- /*
+ 
 
 const availableCharacters =
   "123456780ABCDEFGHIJKLMNOPQRTabcdefghijklmnopqrstuvwxyz";
@@ -321,5 +321,4 @@ for (let i = 0; i < columns; i++) {
     .delay(2000)
     .fadeOut(0);
 });
-*/
 

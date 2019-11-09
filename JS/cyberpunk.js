@@ -1,7 +1,12 @@
 
+
  let player; 
- let points; 
+ let points;
+ let gameOver = false;
+
+
 // LOADING GAME PAGE ON CLICK " SAVE YOUR SYSTEM NOW " 
+
 
 window.onload = function() {
     document.getElementById("start-game").onclick = function () {
@@ -13,9 +18,10 @@ window.onload = function() {
   function startGame() {
     myGameArea.start();
     gameOver = false;
-    player = new Component(60, 60, "./SVG/hacker.svg", 100, 200);
+    player = new Component(60, 60, "./SVG/player.svg", 100, 200);
     myGameArea.myObstacles=[];
     fillObstacles();
+    everyinterval();
     
   }
 
@@ -34,13 +40,13 @@ window.onload = function() {
       this.drawCanvas();
       this.reqAnimation = window.requestAnimationFrame(updateGameArea);
       this.frames=0;
-      this.interval= setInterval(updateGameArea, 800);
+      // this.interval= setInterval(updateGameArea, 800);
     },
     clear: function () {
       this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
     },
     stop: function(){
-      clearInterval(this.interval);
+    clearInterval(this.interval);
     }, 
     score: function() {
       var points = Math.floor(this.frames / 25);
@@ -48,10 +54,11 @@ window.onload = function() {
       this.context.fillStyle = "white";
       this.context.fillText("Virus Avoided: " + points, 500, 50);
     }
+  
   }
-   /*function everyinterval(n){
+  function everyinterval(n){
       if ((myGameArea.frames / n) % 1 === 0) {return true;}
-      return false;}*/
+      return false;}
     
  
 
@@ -112,10 +119,6 @@ window.onload = function() {
   function fillObstacles(){ 
    function x() {return Math.floor(Math.random()*(myGameArea.canvas.width) -80);}
     function y() {return Math.floor(Math.random()*(myGameArea.canvas.height) -80);}
-    console.log('coucou2')
-    // var minGap =30;
-    // var maxGap=300;
-    // var gap= Math.floor(Math.random()*(maxGap - minGap+1) + minGap)
     myGameArea.myObstacles.push (new Component (80, 80, "./SVG/skull.svg", x(), y()))
     myGameArea.myObstacles.push (new Component (80, 80, "./SVG/skull.svg", x(), y()))
     myGameArea.myObstacles.push (new Component (80, 80, "./SVG/skull.svg", x(), y()))
@@ -129,7 +132,6 @@ window.onload = function() {
   }
   
   function drawObstacles() {
-    console.log('coucou')
     myGameArea.myObstacles.forEach(obstacle => {
         obstacle.draw();
     });
@@ -137,12 +139,13 @@ window.onload = function() {
 
 
   function updateGameArea() {
-    console.log('tick');
     myGameArea.clear();
 
     for (i=0; i<myGameArea.myObstacles.length; i++){
-      if (player.crashWith(myGameArea.myObstacles[i])){ myGameArea.stop();
-        alert(" WARNING: YOUR SYSTEM IS HACKED !");
+      if (player.crashWith(myGameArea.myObstacles[i])){
+        const response = confirm(" ALERT: YOUR SYSTEM IS HACKED !");
+        if(response) console.log('restart');
+        if(!response) console.log('restart anyway');
         return; 
       }
 
@@ -151,26 +154,41 @@ window.onload = function() {
     }
     
     myGameArea.frames +=1;
-    for(i=0; i<myGameArea.myObstacles.length; i++) {
-      myGameArea.myObstacles[i].y += 2* (Math.random(1-0.5));
-      myGameArea.myObstacles[i].x += 2* (Math.random(1-0.5));
+    for( var i=0; i<myGameArea.myObstacles.length; i++) {
+      //var minGap =30;
+      //var maxGap=300;
+      //var gap= Math.floor(Math.random()*(maxGap - minGap+1) + minGap)
+      if (Math.random() > 0.5) {
+        myGameArea.myObstacles[i].y += 8 * Math.random() + 11;
+      }
+      else {
+        myGameArea.myObstacles[i].y -= 8 * Math.random() + 11;
+      }
+      if (Math.random() > 0.5) {
+        myGameArea.myObstacles[i].x += 8 * Math.random() + 11;
+      }
+      else {
+        myGameArea.myObstacles[i].x -= 8 * Math.random() + 11;
+      }
       myGameArea.myObstacles[i].update();
-     }
+      }
     player.newPos();
     player.update();
     myGameArea.score();
 
-    myGameArea.reqAnimation = window.requestAnimationFrame(updateGameArea);
+    if(!gameOver) {
+      myGameArea.reqAnimation = window.requestAnimationFrame(updateGameArea);
+    }
   
   }
 
-  
+
 
 //PLAYER MOVE
 
 document.onkeydown = function (e) {
-  if (e.keyCode === 39) {
-    player.x += 10;
+  if (e.keyCode === 39 ) 
+   { player.x += 10;
   }
   if (e.keyCode === 37) {
     player.x -= 10;
@@ -182,6 +200,15 @@ document.onkeydown = function (e) {
     player.y += 10
   }
 };
+
+
+
+
+
+
+
+
+
 
 // document.onkeyup = function(e) {
 //   player.speedX = 0;

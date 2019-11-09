@@ -1,9 +1,7 @@
 
- 
- 
- var player; 
-
- var points; 
+ let player; 
+ let points; 
+ let gameOver;
 
 // LOADING GAME PAGE ON CLICK " SAVE YOUR SYSTEM NOW " 
 window.onload = function() {
@@ -15,11 +13,11 @@ window.onload = function() {
 
   function startGame() {
     myGameArea.start();
-    player = new Component(50, 50, "./SVG/player.svg", 100, 200);
-    // virus = new Component (50, 50, "./SVG/skull.svg", 150, 250);    
+    gameOver = false;
+    player = new Component(60, 60, "./SVG/player.svg", 100, 200);
     myGameArea.myObstacles=[];
     fillObstacles();
-    drawObstacles();
+    
   }
 
   var myGameArea = {
@@ -31,6 +29,7 @@ window.onload = function() {
       this.canvas.height = screen.height - screen.height * 0.25;
       this.context = this.canvas.getContext("2d");
       document.getElementById("game-board").append(this.canvas);
+      
     },
     start: function () {
       this.drawCanvas();
@@ -77,16 +76,16 @@ window.onload = function() {
         );
       },
     
-// Draw obstacles
- this.draw = function (){
-  myObstacles.context.drawImage(
-     this.img,
-     this.x,
-     this.y,
-     this.width,
-     this.height
-   )
- }
+    // Draw obstacles
+    this.draw = function (){
+      myGameArea.context.drawImage(
+        this.img,
+        this.x,
+        this.y,
+        this.width,
+        this.height
+      )
+    }
 
       // and then loop  for each  obstacles.draw 
    
@@ -118,23 +117,25 @@ window.onload = function() {
   };
 
   function fillObstacles(){ 
-    x= Math.floor(Math.random()*(myGameArea.canvas.width - 0+1) + 0)
-    y= Math.floor(Math.random()*(myGameArea.canvas.height - 0+1) + 0)
+    function x() {return Math.floor(Math.random()*(myGameArea.canvas.width) -80);}
+    function y() {return Math.floor(Math.random()*(myGameArea.canvas.height) -80);}
+    console.log('coucou2')
     // var minGap =30;
     // var maxGap=300;
     // var gap= Math.floor(Math.random()*(maxGap - minGap+1) + minGap)
-    myGameArea.myObstacles.push (new Component (50, 50, "./SVG/skull.svg", x, y))
-    myGameArea.myObstacles.push (new Component (50, 50, "./SVG/skull.svg", x, y))
-    myGameArea.myObstacles.push (new Component (50, 50, "./SVG/skull.svg", x, y))
-    myGameArea.myObstacles.push (new Component (50, 50, "./SVG/skull.svg", x, y))
-    myGameArea.myObstacles.push (new Component (50, 50, "./SVG/skull.svg", x, y))
-    myGameArea.myObstacles.push (new Component (50, 50, "./SVG/skull.svg", x, y))
-    myGameArea.myObstacles.push (new Component (50, 50, "./SVG/skull.svg", x, y))
+    myGameArea.myObstacles.push (new Component (80, 80, "./SVG/skull.svg", x(), y()))
+    myGameArea.myObstacles.push (new Component (80, 80, "./SVG/skull.svg", x(), y()))
+    myGameArea.myObstacles.push (new Component (80, 80, "./SVG/skull.svg", x(), y()))
+    myGameArea.myObstacles.push (new Component (80, 80, "./SVG/skull.svg", x(), y()))
+    myGameArea.myObstacles.push (new Component (80, 80, "./SVG/skull.svg", x(), y()))
+    myGameArea.myObstacles.push (new Component (80, 80, "./SVG/skull.svg", x(), y()))
+    myGameArea.myObstacles.push (new Component (80, 80, "./SVG/skull.svg", x(), y()))
     console.log(myGameArea.myObstacles);
   }
   
   function drawObstacles() {
-    myObstacles.forEach(obstacle => {
+    console.log('coucou')
+    myGameArea.myObstacles.forEach(obstacle => {
         obstacle.draw();
     });
   }
@@ -143,13 +144,17 @@ window.onload = function() {
 
 
   function updateGameArea() {
+    console.log('tick');
+    myGameArea.clear();
+
     for (i=0; i<myGameArea.myObstacles.length; i++){
       if (player.crashWith(myGameArea.myObstacles[i])){ myGameArea.stop();
-      return;
-    }
-  }
+        return;
+      }
 
-    myGameArea.clear();
+      drawObstacles();
+    }
+    
     myGameArea.frames +=1;
     // for(var i=0; i<myGameArea.myObstacles.length; i++) {
     //   myGameArea.myObstacles[i].y+=10;
@@ -159,6 +164,7 @@ window.onload = function() {
     player.update();
     // virus.update();
     myGameArea.score();
+
     myGameArea.reqAnimation = window.requestAnimationFrame(updateGameArea);
   
   }
@@ -189,6 +195,7 @@ document.onkeydown = function (e) {
 // }
 }
  
+/*
 
 const availableCharacters =
   "123456780ABCDEFGHIJKLMNOPQRTabcdefghijklmnopqrstuvwxyz";
@@ -300,8 +307,8 @@ class MatrixStream {
   }
 }
 
-const columns = 15;
-const rows = 60;
+const columns = 20;
+const rows = 40;
 const matrix = [];
 
 let container = document.getElementById("container");
@@ -322,3 +329,4 @@ for (let i = 0; i < columns; i++) {
     .fadeOut(0);
 });
 
+*/

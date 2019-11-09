@@ -5,7 +5,10 @@
 }
 
 body {
-  background-color: #1f2138;
+  background-image:url("https://www.123freevectors.com/wp-content/original/170510-pink-purple-and-black-watercolor-background-image.jpg");
+  background-size: cover;
+
+  overflow: hidden;
  
 
 }
@@ -346,7 +349,7 @@ button {
 
 canvas {
   border-style: outset;
-  border-color:palevioletred;
+  border-color:purple;
   padding-left: 0;
   padding-right: 0;
   margin-left: auto;
@@ -357,3 +360,4 @@ canvas {
   overflow:hidden;
 
 }
+

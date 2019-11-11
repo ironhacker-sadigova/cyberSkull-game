@@ -216,7 +216,7 @@ document.onkeydown = function (e) {
 // }
 }
  
-/*
+
 
 const availableCharacters =
   "123456780ABCDEFGHIJKLMNOPQRTabcdefghijklmnopqrstuvwxyz";
@@ -350,4 +350,3 @@ for (let i = 0; i < columns; i++) {
     .fadeOut(0);
 });
 
-*/
